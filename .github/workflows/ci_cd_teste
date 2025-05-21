@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+    #1 build
+  build:
+    uses: MigracaoDotNetForms/ci-cd-pipelines/.github/workflows/reusable-build.yml@main
+    with:
+      build_configuration: 'Release'
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
+
+     #3 deploy
+  deploy:
+    needs: build
+    uses: MigracaoDotNetForms/ci-cd-pipelines/.github/workflows/package-deploy.yml@main
+    with:
+     build_configuration: 'Release'
