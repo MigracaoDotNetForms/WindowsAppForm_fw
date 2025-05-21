@@ -1,3 +1,5 @@
+name: CI_CD_FW_TESTE
+
 on:
   push:
     branches:
